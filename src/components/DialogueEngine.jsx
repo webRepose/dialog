@@ -9,14 +9,8 @@ const DialogueEngine = ({ data, playerName, onExit }) => {
   const [chatHistory, setChatHistory] = useState([]);
 
   const bottomRef = useRef(null);
-  const node = data.nodes[currentNode];
 
-  const restartScenario = () => {
-    setCurrentNode("intro");
-    setStats({ ...data.initialState });
-    setChatHistory([]);
-  };
-
+  // 🔹 Заменяем плейсхолдеры имени игрока
   const replacePlayerName = useCallback(
     (text) => {
       if (!text) return "";
@@ -29,26 +23,33 @@ const DialogueEngine = ({ data, playerName, onExit }) => {
     },
     [playerName]
   );
-  // 📩 Добавление сообщений узла
+
+  // 📩 Добавление сообщений узла без дубликатов
   useEffect(() => {
-    if (!node || !node.messages) return;
+    const node = data.nodes[currentNode];
+    if (!node?.messages) return;
 
     setChatHistory((prev) => {
-      const newMessages = node.messages.map((msg) => ({
-        ...msg,
-        type: "npc",
-        text: replacePlayerName(msg.text),
-      }));
+      const newMessages = node.messages
+        .map((msg) => ({
+          ...msg,
+          type: "npc",
+          text: replacePlayerName(msg.text),
+        }))
+        .filter(
+          (msg) => !prev.some((prevMsg) => prevMsg.text === msg.text)
+        );
+
       return [...prev, ...newMessages];
     });
-  }, [currentNode, node, replacePlayerName]);
+  }, [currentNode, data.nodes, replacePlayerName]);
 
-  // 🔹 Автоскролл
+  // 🔹 Автоскролл вниз при обновлении чата
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatHistory]);
 
-  // 🎯 Применение эффектов
+  // 🎯 Применение эффектов выбора
   const applyEffects = (effects) => {
     setStats((prev) => {
       const updated = { ...prev };
@@ -61,18 +62,28 @@ const DialogueEngine = ({ data, playerName, onExit }) => {
     });
   };
 
-      const handleChoice = (option) => {
-      setChatHistory((prev) => [
-        ...prev,
-        { speaker: "You", text: option.text, type: "user" }, // option.text уже с именем
-      ]);
+  // 🔹 Обработка выбора игрока
+  const handleChoice = (option) => {
+    setChatHistory((prev) => [
+      ...prev,
+      { speaker: "You", text: replacePlayerName(option.text), type: "user" },
+    ]);
 
-      if (option.effects) {
-        applyEffects(option.effects);
-      }
+    if (option.effects) {
+      applyEffects(option.effects);
+    }
 
-      setCurrentNode(option.next);
-    };
+    setCurrentNode(option.next);
+  };
+
+  // 🔹 Перезапуск сценария
+  const restartScenario = () => {
+    setCurrentNode("intro");
+    setStats({ ...data.initialState });
+    setChatHistory([]);
+  };
+
+  const node = data.nodes[currentNode]; // определяем node после всех хуков
 
   return (
     <div className={Style.wrapper}>
@@ -80,28 +91,24 @@ const DialogueEngine = ({ data, playerName, onExit }) => {
         <div className={Style.missionTitle}>{data.title}</div>
         <ScorePanel stats={stats} />
       </div>
-      <SceneRenderer
-        node={{
+      {node && (
+        <SceneRenderer
+          node={{
             ...node,
-            options: node.options?.map(opt => ({
+            options: node.options?.map((opt) => ({
               ...opt,
-              text: replacePlayerName(opt.text)
-            }))
+              text: replacePlayerName(opt.text),
+            })),
           }}
-        onChoice={(option) => {
-          const replacedOption = {
-            ...option,
-            text: replacePlayerName(option.text)
-          };
-          handleChoice(replacedOption);
-        }}
-        onRestart={restartScenario}
-        onBackToMenu={onExit}
-        stats={stats}
-        chatHistory={chatHistory}
-        bottomRef={bottomRef}
-        scoring={data.scoring}
-      />
+          onChoice={handleChoice}
+          onRestart={restartScenario}
+          onBackToMenu={onExit}
+          stats={stats}
+          chatHistory={chatHistory}
+          bottomRef={bottomRef}
+          scoring={data.scoring}
+        />
+      )}
     </div>
   );
 };

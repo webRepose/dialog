@@ -5,7 +5,8 @@
   padding: 20px;
   border-radius: 24px;
 
-  background: rgba(255, 255, 255, 0.05);
+  // background: var(--chat-bg);
+  background-color: var(--header-bg);
   backdrop-filter: blur(12px);
 }
 
@@ -40,19 +41,19 @@
   max-width: 70%;
   white-space: pre-wrap;
   line-height: 1.5;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bubble-bg);
   border: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(6px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .user_row .bubble {
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-  color: white;
+  background: var(--bubble-user-bg);
+  color: var(--bubble-text-color);
 }
 
 .system_bubble {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--system-bubble-bg);
   font-style: italic;
   text-align: center;
   border-radius: 14px;
@@ -61,9 +62,9 @@
 
 .document {
   font-family: "Times New Roman", serif;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--document-bg);
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--document-border);
 }
 
 .choice_container {
@@ -71,18 +72,18 @@
 }
 
 .choice_card {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--choice-card-bg);
   border-radius: 18px;
   padding: 16px;
   margin-bottom: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--choice-card-border);
   cursor: pointer;
   transition: 0.25s ease;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 
   &:hover {
     transform: translateY(-3px) scale(1.02);
-    border: 1px solid rgba(0, 255, 255, 0.5);
+    border: 1px solid var(--choice-card-hover-border);
   }
 }
 
@@ -101,30 +102,28 @@
   margin: 40px auto;
   padding: 30px;
   max-width: 700px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--header-bg);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: white;
+  border: 1px solid var(--final-screen-border);
+  color: var(--text-color);
 }
 
 .score {
   margin-top: 16px;
   font-size: 22px;
   font-weight: 600;
-  color: #00f5ff;
+  color: var(--score-color);
 }
 
 @media (max-width: 600px) {
-  
-
   .final_actions {
-  flex-direction: column;
-  gap: 12px;
-}
+    flex-direction: column;
+    gap: 12px;
+  }
 
-.action_btn {
-  width: 100%;
-}
+  .action_btn {
+    width: 100%;
+  }
 
   .chat_container {
     padding: 10px;
@@ -156,7 +155,6 @@
   }
 }
 
-
 .final_actions {
   margin-top: 30px;
   display: flex;
@@ -177,8 +175,8 @@
 }
 
 .restart {
-  background: linear-gradient(135deg, #22d3ee, #0ea5e9);
-  color: white;
+  background: var(--restart-btn-bg);
+  color: var(--restart-btn-text);
 
   &:hover {
     transform: translateY(-2px);
@@ -187,11 +185,12 @@
 }
 
 .menu {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--btn-bg);
+  color: var(--menu-btn-text);
+  border: 1px solid var(--menu-btn-border);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.4);
   }
 }

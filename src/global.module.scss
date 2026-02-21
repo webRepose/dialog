@@ -1,0 +1,114 @@
+:root {
+  /* Светлая тема */
+  --bg-color: #f0f4f8;
+  --text-color: #1f2937;
+  --gradient-bg: radial-gradient(
+      circle at 20% 20%,
+      rgba(0, 200, 255, 0.08),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(0, 140, 255, 0.08),
+      transparent 40%
+    ),
+    linear-gradient(135deg, #dbeafe, #bfdbfe, #93c5fd);
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-border: rgba(0,0,0,0.08);
+  --card-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  --header-bg: rgba(255, 255, 255, 0.8);
+  --header-border: rgba(0,0,0,0.1);
+  --header-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  --btn-bg: linear-gradient(135deg, #22d3ee, #0ea5e9);
+  --btn-text: white;
+
+  /* Новые переменные для grid/cards */
+  --grid-bg: var(--gradient-bg);
+  --grid-card-bg: var(--card-bg);
+  --grid-card-border: var(--card-border);
+  --grid-card-shadow: var(--card-shadow);
+  --grid-card-hover-border: rgba(0, 200, 255, 0.5);
+
+  /* Новые переменные для чата */
+  --chat-bg: rgba(255,255,255,0.05);
+  --bubble-bg: rgba(255,255,255,0.08);
+  --bubble-user-bg: linear-gradient(135deg, #00c6ff, #0072ff);
+  --bubble-text-color: white;
+  --system-bubble-bg: rgba(255,255,255,0.15);
+  --document-bg: rgba(255,255,255,0.15);
+  --document-border: rgba(255,255,255,0.15);
+  --choice-card-bg: rgba(255,255,255,0.06);
+  --choice-card-border: rgba(255,255,255,0.08);
+  --choice-card-hover-border: rgba(0,200,255,0.5);
+  --final-screen-bg: rgba(255,255,255,0.05);
+  --final-screen-border: rgba(255,255,255,0.08);
+  --score-color: #533c6d;
+  --restart-btn-bg: linear-gradient(135deg, #22d3ee, #0ea5e9);
+  --restart-btn-text: white;
+  --menu-btn-bg: rgba(255,255,255,0.1);
+  --menu-btn-text: white;
+  --menu-btn-border: rgba(255,255,255,0.2);
+}
+
+[data-theme="dark"] {
+  /* Тёмная тема */
+  --bg-color: #0f2027;
+  --text-color: #ffffff;
+  --gradient-bg: radial-gradient(
+      circle at 20% 20%,
+      rgba(0, 255, 255, 0.08),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(0, 140, 255, 0.08),
+      transparent 40%
+    ),
+    linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  --header-bg: rgba(255, 255, 255, 0.05);
+  --header-border: rgba(255, 255, 255, 0.08);
+  --header-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  --btn-bg: linear-gradient(135deg, #22d3ee, #0ea5e9);
+  --btn-text: #ffffff;
+
+  /* Новые переменные для grid/cards */
+  --grid-bg: var(--gradient-bg);
+  --grid-card-bg: var(--card-bg);
+  --grid-card-border: var(--card-border);
+  --grid-card-shadow: var(--card-shadow);
+  --grid-card-hover-border: rgba(0, 255, 255, 0.5);
+
+  /* Новые переменные для чата */
+  --chat-bg: rgba(255,255,255,0.05);
+  --bubble-bg: rgba(255,255,255,0.08);
+  --bubble-user-bg: linear-gradient(135deg, #00c6ff, #0072ff);
+  --bubble-text-color: white;
+  --system-bubble-bg: rgba(255,255,255,0.15);
+  --document-bg: rgba(255,255,255,0.15);
+  --document-border: rgba(255,255,255,0.15);
+  --choice-card-bg: rgba(255,255,255,0.06);
+  --choice-card-border: rgba(255,255,255,0.08);
+  --choice-card-hover-border: rgba(0,255,255,0.5);
+  --final-screen-bg: rgba(255,255,255,0.05);
+  --final-screen-border: rgba(255,255,255,0.08);
+  --score-color: #00f5ff;
+  --restart-btn-bg: linear-gradient(135deg, #22d3ee, #0ea5e9);
+  --restart-btn-text: white;
+  --menu-btn-bg: rgba(255,255,255,0.1);
+  --menu-btn-text: white;
+  --menu-btn-border: rgba(255,255,255,0.2);
+}
+
+
+/* =========================
+   Общие стили
+========================= */
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s ease, color 0.3s ease;
+}

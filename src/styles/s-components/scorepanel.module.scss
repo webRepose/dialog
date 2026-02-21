@@ -7,14 +7,16 @@
 
 .card {
   flex: 1 1 200px; // минимальная ширина 200px, можно масштабировать
-  background: #1e1f26;
+  background: var(--card-bg);
+  color: var(--text-color);
   padding: 16px;
-  color: white;
   border-radius: 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   box-sizing: border-box;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
 }
 
 .top {
@@ -27,6 +29,7 @@
 
 .icon {
   font-size: 18px;
+  color: var(--text-color);
 }
 
 .label {
@@ -34,16 +37,18 @@
   font-size: 14px;
   opacity: 0.8;
   min-width: 50px; // чтобы не сжималось слишком сильно
+  color: var(--text-color);
 }
 
 .value {
   font-weight: bold;
   font-size: 16px;
+  color: var(--text-color);
 }
 
 .bar {
   height: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1); // можно оставить как highlight
   border-radius: 6px;
   overflow: hidden;
   margin-top: 4px;
@@ -51,13 +56,13 @@
 
 .fill {
   height: 100%;
-  background: linear-gradient(90deg, #4ade80, #22d3ee);
+  background: linear-gradient(90deg, #4ade80, #22d3ee); // можно добавить переменные позже
   transition: width 0.3s ease;
 }
 
-// =====================
-// Мобильная адаптация
-// =====================
+/* =====================
+   Мобильная адаптация
+===================== */
 @media (max-width: 600px) {
   .panel {
     gap: 12px;
