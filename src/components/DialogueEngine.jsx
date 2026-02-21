@@ -3,10 +3,17 @@ import SceneRenderer from "./SceneRenderer";
 import ScorePanel from "./ScorePanel";
 import Style from "../styles/s-components/dialogue.module.scss";
 
-const DialogueEngine = ({ data }) => {
+const DialogueEngine = ({ data, onExit }) => {
   const [currentNode, setCurrentNode] = useState("intro");
   const [stats, setStats] = useState(() => ({ ...data.initialState }));
   const [chatHistory, setChatHistory] = useState([]);
+
+
+const restartScenario = () => {
+  setCurrentNode("intro");
+  setStats({ ...data.initialState });
+  setChatHistory([]);
+};
 
   const bottomRef = useRef(null);
   const node = data.nodes[currentNode];
@@ -77,14 +84,16 @@ const DialogueEngine = ({ data }) => {
         <ScorePanel stats={stats} />
       </div>
 
-      <SceneRenderer
-        node={node}
-        onChoice={handleChoice}
-        stats={stats}
-        chatHistory={chatHistory}
-        bottomRef={bottomRef}
-        scoring={data.scoring}
-      />
+<SceneRenderer
+  node={node}
+  onChoice={handleChoice}
+  onRestart={restartScenario}
+  onBackToMenu={onExit}
+  stats={stats}
+  chatHistory={chatHistory}
+  bottomRef={bottomRef}
+  scoring={data.scoring}
+/>
 
     </div>
   );

@@ -1,8 +1,10 @@
 import Style from "../styles/s-components/scenerender.module.scss";
 
-const SceneRenderer = ({
+  const SceneRenderer = ({
   node,
   onChoice,
+  onRestart,
+  onBackToMenu,
   stats,
   chatHistory,
   bottomRef,
@@ -72,47 +74,62 @@ const SceneRenderer = ({
 
   if (node.type === "final-feedback") {
 
-    // если scoring не задан — берём все числовые stats
-    const scoringKeys =
-      scoring && scoring.length
-        ? scoring
-        : Object.keys(stats);
+  const scoringKeys =
+    scoring && scoring.length
+      ? scoring
+      : Object.keys(stats);
 
-    const values = scoringKeys
-      .map(key => Number(stats[key]))
-      .filter(val => !isNaN(val));
+  const values = scoringKeys
+    .map(key => Number(stats[key]))
+    .filter(val => !isNaN(val));
 
-    const total = values.reduce((sum, val) => sum + val, 0);
+  const total = values.reduce((sum, val) => sum + val, 0);
 
-    const average =
-      values.length > 0
-        ? total / values.length
-        : 0;
+  const average =
+    values.length > 0
+      ? total / values.length
+      : 0;
 
-    const excellent = node.thresholds?.excellent ?? 75;
-    const good = node.thresholds?.good ?? 55;
+  const excellent = node.thresholds?.excellent ?? 75;
+  const good = node.thresholds?.good ?? 55;
 
-    let message = "";
+  let message = "";
 
-    if (average >= excellent) {
-      message = node.feedback?.excellent ?? "Excellent performance!";
-    } else if (average >= good) {
-      message = node.feedback?.good ?? "Good effort.";
-    } else {
-      message = node.feedback?.poor ?? "Needs improvement.";
-    }
-
-    return (
-      <div className={Style.final_screen}>
-        <h2>Final Feedback</h2>
-        <p>{message}</p>
-
-        <div className={Style.score}>
-          Final Score: {Math.round(average)}
-        </div>
-      </div>
-    );
+  if (average >= excellent) {
+    message = node.feedback?.excellent ?? "Excellent performance!";
+  } else if (average >= good) {
+    message = node.feedback?.good ?? "Good effort.";
+  } else {
+    message = node.feedback?.poor ?? "Needs improvement.";
   }
+
+  return (
+    <div className={Style.final_screen}>
+      <h2>Финальный отзыв</h2>
+      <p>{message}</p>
+
+      <div className={Style.score}>
+        Кол-во баллов: {Math.round(average)}
+      </div>
+
+      <div className={Style.final_actions}>
+        <button
+          className={`${Style.action_btn} ${Style.restart}`}
+          onClick={onRestart}
+        >
+          🔁 Повторить
+        </button>
+
+        <button
+          className={`${Style.action_btn} ${Style.menu}`}
+          onClick={onBackToMenu}
+        >
+          🏠 Вернуться в меню
+        </button>
+      </div>
+    </div>
+  );
+}
 
   return null;
 };

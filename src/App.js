@@ -41,7 +41,7 @@ function App() {
       {!selectedTopic ? (
         <TopicsMenu topics={topics} onSelect={setSelectedTopic} />
       ) : (
-        <DialogueEngine data={selectedTopic} />
+        <DialogueEngine data={selectedTopic} onExit={() => setSelectedTopic(null)} />
       )}
     </>
   );

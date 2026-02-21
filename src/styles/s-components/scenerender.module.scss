@@ -115,6 +115,17 @@
 }
 
 @media (max-width: 600px) {
+  
+
+  .final_actions {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action_btn {
+  width: 100%;
+}
+
   .chat_container {
     padding: 10px;
   }
@@ -142,5 +153,45 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+
+.final_actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action_btn {
+  padding: 12px 22px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.25s ease;
+  min-width: 180px;
+}
+
+.restart {
+  background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+  color: white;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.4);
+  }
+}
+
+.menu {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
 }
