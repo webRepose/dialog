@@ -11,7 +11,7 @@ export const situation1 = {
   initialState: {
     impression: 0,      // Impression of employer
     reputation: 10,     // Professional Reputation
-    budget: 100,
+    // budget: 100,
     time: 100
   },
 

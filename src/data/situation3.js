@@ -12,7 +12,7 @@ export const situation3 = {
   initialState: {
     satisfaction: 0,      // Customer Satisfaction
     reputation: 10,       // Professional Reputation
-    budget: 100,
+    // budget: 100,
     time: 100
   },
 
