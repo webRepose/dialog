@@ -72,7 +72,7 @@ export const situation12 = {
       messages: [
         {
           speaker: "Ms. Elena Petrova",
-          text: "-	Of course. It’s a liquid chemical, non-hazardous. It’s not perishable, but it must be kept pure. The units are quite large and very heavy."
+          text: "-Of course. It’s a liquid chemical, non-hazardous. It’s not perishable, but it must be kept pure. The units are quite large and very heavy."
         }
       ],
       options: [

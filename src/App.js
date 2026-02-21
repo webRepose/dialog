@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DialogueEngine from "./components/DialogueEngine";
 import TopicsMenu from "./pages/TopicsMenu";
+import ScreenStart from "./pages/ScreenStart";
 import { situation1 } from "./data/situation1";
 import { situation2 } from "./data/situation2";
 import { situation3 } from "./data/situation3";
@@ -34,16 +35,52 @@ const topics = [
 ];
 
 function App() {
+  const [screen, setScreen] = useState("start"); 
+  // "start" | "menu" | "dialogue"
+
+  const [playerName, setPlayerName] = useState(
+    localStorage.getItem("playerName") || ""
+  );
+
+    const handleSetName = (name) => {
+    setPlayerName(name);
+    localStorage.setItem("playerName", name);
+  };
+
   const [selectedTopic, setSelectedTopic] = useState(null);
 
+  // --- START SCREEN ---
+if (screen === "start") {
   return (
-    <>
-      {!selectedTopic ? (
-        <TopicsMenu topics={topics} onSelect={setSelectedTopic} />
-      ) : (
-        <DialogueEngine data={selectedTopic} onExit={() => setSelectedTopic(null)} />
-      )}
-    </>
+    <ScreenStart
+      savedName={playerName}
+      onStart={(name) => {
+        handleSetName(name);   // ← используем функцию
+        setScreen("menu");
+      }}
+    />
+  );
+}
+  // --- MENU ---
+  if (screen === "menu") {
+    return (
+      <TopicsMenu
+        topics={topics}
+        onSelect={(topic) => {
+          setSelectedTopic(topic);
+          setScreen("dialogue");
+        }}
+      />
+    );
+  }
+
+  // --- DIALOGUE ---
+  return (
+    <DialogueEngine
+      data={selectedTopic}
+      playerName={playerName}
+      onExit={() => setScreen("menu")}
+    />
   );
 }
 
