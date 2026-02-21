@@ -30,7 +30,7 @@ const DialogueEngine = ({ data }) => {
 
       return [...prev, ...newMessages];
     });
-  }, [currentNode]);
+  }, [currentNode, node]);
 
   // ⬇ автоскролл
   useEffect(() => {
